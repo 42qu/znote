@@ -1,6 +1,4 @@
-<!DOCTYPE html
-PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <%!
 from static import css
@@ -9,26 +7,33 @@ from static import css
 <html>
     <head>
         <title>Hello</title>
-        ${css('index/index.css')|n}
-        ${css('typo.css')|n}
+        ${css('style.css')|n}
+        <!--${css('typo.css')|n}-->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; minimum-scale=1.0; maximum-scale=1.0; user-scalable=no;" />
     </head>
     <body>
         %if msg_lst:
+        <ul id="list">
             %for m in msg_lst:
-            <div>
-                <p>Q: <a href="/m/${m['id']}">${m['text']}</a></p>
-                <p>A: ${m['answer']} </p>
-                <p>由 ${m['who']} 提问</p>
-            </div>
+            <li class="item">
+                <div class="question">Q: <a href="/m/${m['id']}">${m['text']}</a>由 ${m['who']} 提问</div>
+                <div class="answer">A: ${m['answer']} </div>
+            </li>
             %endfor
+        </ul>
         %else:
-            <p>尚未有信息。</p>
+        <p>尚未有信息。</p>
         %endif
-        <form method="POST">
-            <p>我是:<input name="who"/></p>
-            <p>要问:<input name="text"/></p>
-            <input type="submit">
-        </form>
+        <div id="new">
+            <form method="POST">
+                <p>我是:<input name="who"/></p>
+                <p>要问:<input name="text"/></p>
+                <input type="submit">
+            </form>
+        </div>
     </body>
 </html>
 
