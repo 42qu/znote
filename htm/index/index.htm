@@ -1,0 +1,34 @@
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<%!
+from static import css
+%>
+
+<html>
+    <head>
+        <title>Hello</title>
+        ${css('index/index.css')|n}
+        ${css('typo.css')|n}
+    </head>
+    <body>
+        %if msg_lst:
+            %for m in msg_lst:
+            <div>
+                <p>Q: <a href="/m/${m['id']}">${m['text']}</a></p>
+                <p>A: ${m['answer']} </p>
+                <p>由 ${m['who']} 提问</p>
+            </div>
+            %endfor
+        %else:
+            <p>尚未有信息。</p>
+        %endif
+        <form method="POST">
+            <p>我是:<input name="who"/></p>
+            <p>要问:<input name="text"/></p>
+            <input type="submit">
+        </form>
+    </body>
+</html>
+

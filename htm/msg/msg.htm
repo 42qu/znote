@@ -1,0 +1,32 @@
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<%!
+from static import css
+%>
+
+<html>
+    <head>
+        <title>${info['text']}</title>
+        ${css('typo.css')|n}
+    </head>
+    <body>
+        <p>问题：${info['text']}</p>
+        <div>
+            %if re:
+                <p>回答：</p>
+            %endif
+            %for i in re:
+                <p>${i['t'].encode('utf-8')}</p>
+                <p>回答者:${i['who'].encode('utf-8')}</p>
+            %endfor
+        </div>
+        <form method="POST">
+            <p>我是:<input name="who"/></p>
+            <p>回答:<input name="text"/></p>
+            <input type="submit">
+        </form>
+    </body>
+</html>
+
